@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/dgordon/workspace/solar/spa.c
+math.h
+-
+spa.h
+/Users/dgordon/workspace/solar/spa.h
+
+/Users/dgordon/workspace/solar/spa.h
+
+/Users/dgordon/workspace/solar/spa_tester.c
+stdio.h
+-
+spa.h
+/Users/dgordon/workspace/solar/spa.h
+
