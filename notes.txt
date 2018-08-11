@@ -1,0 +1,56 @@
+#### Use a .so 
+
+from ctypes import *
+
+#load the shared object file
+adder = CDLL('./adder.so')
+
+#Find sum of integers
+res_int = adder.add_int(4,5)
+print "Sum of 4 and 5 = " + str(res_int)
+
+#Find sum of floats
+a = c_float(5.5)
+b = c_float(4.1)
+
+add_float = adder.add_float
+add_float.restype = c_float
+print "Sum of 5.5 and 4.1 = ", str(add_float(a, b))
+
+
+
+#### Use spa struct
+
+class SpaData(ctypes.Structure):
+     _fields_ = [
+	            ("year", ctypes.c_int),
+				("month", ctypes.c_int),
+				("day", ctypes.c_int),
+				("hour", ctypes.c_int),
+				("minute", ctypes.c_int),
+				
+                ("second", ctypes.c_double),
+				("timezone", ctypes.c_double),
+				("delta_ut1", ctypes.c_double),
+				("delta_t", ctypes.c_double),
+				("longitude", ctypes.c_double),
+				("latitude", ctypes.c_double),
+				("elevation", ctypes.c_double),
+				("pressure", ctypes.c_double),
+				("temperature", ctypes.c_double),
+				("slope", ctypes.c_double),
+				("azm_rotation", ctypes.c_double),
+				("atmos_refract", ctypes.c_double),
+                ("function", ctypes.c_int)]
+
+
+¡¡¡!!!  SPA_ALL is 3 for function ¡¡¡!!! 
+
+enum {
+    SPA_ZA,           //calculate zenith and azimuth
+    SPA_ZA_INC,       //calculate zenith, azimuth, and incidence
+    SPA_ZA_RTS,       //calculate zenith, azimuth, and sun rise/transit/set values
+    SPA_ALL,          //calculate all SPA output values
+};
+
+¡¡¡!!! Need to use ctypes.byref(   )   for &  ¡¡¡!!!
