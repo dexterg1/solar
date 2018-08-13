@@ -1,22 +1,3 @@
-/// Use a .so 
-
-¡¡¡!!!  SPA_ALL is 3 for function ¡¡¡!!! 
-
-enum {
-    SPA_ZA,           //calculate zenith and azimuth
-    SPA_ZA_INC,       //calculate zenith, azimuth, and incidence
-    SPA_ZA_RTS,       //calculate zenith, azimuth, and sun rise/transit/set values
-    SPA_ALL,          //calculate all SPA output values
-};
-
-/// !¡ Need to use ctypes.byref(   ) for by ref &  !¡
-
-///	Compile spa.c for use in python
-
-gcc -shared -Wl,-install_name,spa.so -o spa.so -fPIC spa.c
-
-///	Include all spa.h struct 'spa_data'  values in python analog SpaData. Exhaustive is required as the structure is passed as ref to the precompiled spa.so and contains the calculated values for sun position.
-
 import ctypes
 
 spa = ctypes.CDLL('./spa.so')
@@ -154,3 +135,22 @@ data = SpaData(
 0.0)
 
 result = spa.spa_calculate(ctypes.byref(data))
+
+#returns a dict with status, zenith and azimuth
+def calculate_position(year, month, day, hour, minute, second, latitude, longitude):
+	data.year 		=  year 	
+	data.month 		=  month 	
+	data.day 		=  day 	
+	data.hour 		=  hour 	
+	data.minute 	=  minute 
+	data.second 	=  second 
+	data.latitude 	=  latitude 
+	data.longitude 	=  longitude
+	
+	result = spa.spa_calculate(ctypes.byref(data))
+	
+	return {'status': result, 'zenith': data.zenith, 'azimuth': data.azimuth}
+
+print('Zenith: ' + str(data.zenith) + ', Azimuth: ' + str(data.azimuth))
+
+

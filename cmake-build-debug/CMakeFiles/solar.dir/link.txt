@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/cc -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/solar.dir/spa.c.o CMakeFiles/solar.dir/spa_tester.c.o  -o solar 
