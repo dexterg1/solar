@@ -154,3 +154,21 @@ data = SpaData(
 0.0)
 
 result = spa.spa_calculate(ctypes.byref(data))
+
+//returns a dict with zenith and azimuth
+def calculate_position(year, month, day, hour, minute, second, latitude, longitude)
+	data.year 		=  year 	
+	data.month 		=  month 	
+	data.day 		=  day 	
+	data.hour 		=  hour 	
+	data.minute 	=  minute 
+	data.second 	=  second 
+	data.latitude 	=  latitude 
+	data.longitude 	=  longitude
+	
+	result = spa.spa_calculate(ctypes.byref(data))
+	
+	return {'status': result, 'zenith': data.zenith, 'azimuth': data.azimuth}
+
+print('Zenith: ' + str(data.zenith) + ', Azimuth: ' + str(data.azimuth))
+
